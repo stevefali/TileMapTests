@@ -12,9 +12,6 @@ let tileArray = [];
 const columnQuantity = Math.floor(canvas.width / tileSize);
 const rowQuantity = Math.floor(canvas.height / tileSize);
 
-console.log("width: ", canvas.width);
-console.log("columns: ", columnQuantity);
-
 // Make 2D array filled with zeros
 tileArray = Array.from({ length: columnQuantity }, () =>
   Array(rowQuantity).fill("0")
@@ -42,15 +39,16 @@ function generateFloor(tileArray, minSection) {
 
     // If wide enough and not too low or high, use the last height determine whether up or down. (Or do nothing)
     if (nextMove === "0" && lastHeight > 0 && sectionSize > minSection) {
-      console.log("true");
-      lastHeight--;
+      const heightChange = Math.floor(Math.random() * 3) + 1;
+      lastHeight -= heightChange;
       sectionSize = 0;
     } else if (
       nextMove === "1" &&
       lastHeight < rowQuantity / 2 &&
       sectionSize > minSection
     ) {
-      lastHeight++;
+      const heightChange = Math.floor(Math.random() * 3) + 1;
+      lastHeight += heightChange;
       sectionSize = 0;
     }
 
@@ -83,4 +81,4 @@ function drawTile(x, y, isTile) {
 }
 
 // Do it
-const finishedArr = generateFloor(tileArray, 4);
+const finishedArr = generateFloor(tileArray, 5);
